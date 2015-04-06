@@ -1,31 +1,15 @@
 package clienthadl;
 
-import java.util.List;
+import java.util.List; 
 
 public class Client {
 
-	private List<ClientInterface> clientInterfaces;
-	
-	public Client() {
-		
-	}
-
-	public List<ClientInterface> getClientInterfaces() {
-		return clientInterfaces;
-	}
-
-	public void setClientInterfaces(List<ClientInterface> clientInterfaces) {
-		this.clientInterfaces = clientInterfaces;
-	}
-	
-	public void addClientInterface(ClientInterface c) {
-		this.clientInterfaces.add(c);
-	}
-	
-	public void connect() {
-		System.out.println("Ip : ");
-		
-		
-		this.clientInterfaces.get(1).connect("127.0.0.1", 540);
+	public static void main (String [] args) {
+		if(args.length == 0){
+			System.out.println("Tentative de connection à localhost:5163");
+			new ClientInterface("localhost","5163", "2");
+		}else{
+			new ClientInterface(args[0], args[1], args[2]);
+		}
 	}
 }
