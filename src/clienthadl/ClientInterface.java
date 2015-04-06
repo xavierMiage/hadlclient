@@ -74,15 +74,24 @@ public class ClientInterface implements Runnable  {
 	public void run (){
 		JSONObject json = new JSONObject();
 		json.put("id", this.id);
+		json.put("nom", "Arn");
+		json.put("id_article", 1);
 		this.send(json.toJSONString());
-		this.read();
+		json = this.read();
+		
+		if(json.containsKey("error")) {
+			System.out.println(json.get("error"));
+		}
+		else {
+			System.out.println("Nom : " + json.get("nom"));
+			System.out.println("Prix : " + json.get("prix"));
+		}
 	}
 	
 	
 	public void send (String scor){
 		PrintWriter output;
 		try {
-			System.out.println(scor);
 			output = new PrintWriter(new BufferedWriter(new OutputStreamWriter(ClientInterface.this.socket.getOutputStream())), true);
 			output.println(scor) ;
 		} catch (IOException e) {
@@ -97,7 +106,6 @@ public class ClientInterface implements Runnable  {
 			Map<String,String> map = new HashMap<String,String>();
 			BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			String message = input.readLine();
-			System.out.println(message);
 			
 			map = mapper.readValue(message, new TypeReference<HashMap<String,String>>(){});
 			JSONObject json = new JSONObject(map);
