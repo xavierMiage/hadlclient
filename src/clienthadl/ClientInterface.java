@@ -74,7 +74,7 @@ public class ClientInterface implements Runnable  {
 	public void run (){
 		JSONObject json = new JSONObject();
 		json.put("id", this.id);
-		json.put("nom", "Arn");
+		json.put("nom", "Xav");
 		json.put("id_article", 1);
 		this.send(json.toJSONString());
 		json = this.read();
